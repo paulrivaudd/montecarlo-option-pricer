@@ -1,5 +1,4 @@
-"""End-to-end demo: price a European option by Monte Carlo and compare to Black-Scholes.
-À lancer une fois les 4 étapes codées."""
+"""End-to-end demo: price a European option by Monte Carlo and compare to Black-Scholes."""
 
 from mc_pricer import (
     GBMSimulator,
@@ -21,12 +20,12 @@ mc_result = MonteCarloPricer(r=R, T=T).price(s_t, K, option_type=OPTION_TYPE)
 bs_price = BlackScholes(s0=S0, k=K, r=R, sigma=SIGMA, T=T).price(OPTION_TYPE)
 comparison = compare_to_bs(mc_result, bs_price)
 
-print(f"Prix Monte Carlo  : {mc_result.price:.4f}  (IC95% [{mc_result.ci_low:.4f}, {mc_result.ci_high:.4f}])")
-print(f"Prix Black-Scholes: {bs_price:.4f}")
-print(f"Ecart absolu      : {comparison['abs_error']:.6f}")
-print(f"Ecart relatif     : {comparison['rel_error']:.4%}")
-print(f"BS dans l'IC 95%  : {comparison['within_ci']}")
+print(f"Monte Carlo price : {mc_result.price:.4f}  (95% CI [{mc_result.ci_low:.4f}, {mc_result.ci_high:.4f}])")
+print(f"Black-Scholes price: {bs_price:.4f}")
+print(f"Absolute error    : {comparison['abs_error']:.6f}")
+print(f"Relative error    : {comparison['rel_error']:.4%}")
+print(f"BS within 95% CI  : {comparison['within_ci']}")
 
 ns, running_mean, half_width = convergence_curve(s_t, K, R, T, option_type=OPTION_TYPE)
 plot_convergence(ns, running_mean, half_width, bs_price, OPTION_TYPE, savepath="convergence.png")
-print("Graphique sauvegarde : convergence.png")
+print("Plot saved: convergence.png")

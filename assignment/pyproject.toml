@@ -3,9 +3,9 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mc-pricer"
+name = "mc-pricer-assignment"
 version = "0.1.0"
-description = "Pricer Monte Carlo pour options europeennes sous le modele Black-Scholes"
+description = "Assignment: Monte Carlo pricer for European options (to be completed)"
 requires-python = ">=3.9"
 dependencies = [
     "numpy>=1.24",

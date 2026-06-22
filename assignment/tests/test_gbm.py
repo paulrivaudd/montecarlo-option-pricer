@@ -1,4 +1,4 @@
-"""Étape 1 — vérifie GBMSimulator sans dépendre des autres étapes."""
+"""Step 1 — checks GBMSimulator independently of the other steps."""
 
 import numpy as np
 
@@ -14,7 +14,7 @@ def test_terminal_shape():
 
 
 def test_terminal_moments_match_lognormal_theory():
-    # E[S_T] = S0 * e^{rT} sous la mesure risque-neutre.
+    # E[S_T] = S0 * e^{rT} under the risk-neutral measure.
     s_t = GBMSimulator(s0=S0, r=R, sigma=SIGMA, seed=1).terminal(T, n_paths=2_000_000)
     expected_mean = S0 * np.exp(R * T)
     assert abs(s_t.mean() - expected_mean) / expected_mean < 0.01
@@ -27,7 +27,7 @@ def test_paths_shape_and_initial_value():
 
 
 def test_paths_terminal_consistent_with_terminal_method():
-    # Les deux méthodes simulent la même loi : moyennes proches sur un grand échantillon.
+    # Both methods simulate the same law: means should be close on a large sample.
     sim_a = GBMSimulator(s0=S0, r=R, sigma=SIGMA, seed=3)
     sim_b = GBMSimulator(s0=S0, r=R, sigma=SIGMA, seed=4)
     a = sim_a.terminal(T, n_paths=500_000)

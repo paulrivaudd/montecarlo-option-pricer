@@ -1,5 +1,5 @@
-"""Étape 3 — valeurs de référence calculées indépendamment (scipy.stats.norm),
-pour vérifier BlackScholes sans dépendre de ta propre simulation Monte Carlo."""
+"""Step 3 — reference values computed independently (scipy.stats.norm),
+to check BlackScholes without depending on your own Monte Carlo simulation."""
 
 from mc_pricer import BlackScholes
 

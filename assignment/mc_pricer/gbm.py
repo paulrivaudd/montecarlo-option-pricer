@@ -28,11 +28,11 @@ class GBMSimulator:
         Draw S_T directly from its exact log-normal law. Shape: (n_paths,).
 
         TODO:
-        1. Tire `n_paths` réalisations Z ~ N(0,1) avec self.rng.standard_normal.
-        2. Calcule S_T = s0 * exp[(r - sigma^2/2) * T + sigma * sqrt(T) * Z].
-        3. Retourne le tableau (pas de boucle Python).
+        1. Draw `n_paths` realizations Z ~ N(0,1) with self.rng.standard_normal.
+        2. Compute S_T = s0 * exp[(r - sigma^2/2) * T + sigma * sqrt(T) * Z].
+        3. Return the array (no Python loop).
         """
-        raise NotImplementedError("Étape 1 : implémente terminal()")
+        raise NotImplementedError("Step 1: implement terminal()")
 
     def paths(self, T: float, n_steps: int, n_paths: int) -> np.ndarray:
         """
@@ -41,10 +41,10 @@ class GBMSimulator:
 
         TODO:
         1. dt = T / n_steps.
-        2. Tire une matrice Z de forme (n_paths, n_steps).
-        3. Calcule les incréments log-prix : (r - sigma^2/2)*dt + sigma*sqrt(dt)*Z.
-        4. Cumule ces incréments (np.cumsum, axis=1) en partant de ln(s0).
-        5. Concatène la colonne t=0 (toutes égales à ln(s0)) puis repasse en
-           espace prix avec np.exp.
+        2. Draw a matrix Z of shape (n_paths, n_steps).
+        3. Compute the log-price increments: (r - sigma^2/2)*dt + sigma*sqrt(dt)*Z.
+        4. Cumulate these increments (np.cumsum, axis=1) starting from ln(s0).
+        5. Prepend the t=0 column (all equal to ln(s0)), then exponentiate
+           back to price space with np.exp.
         """
-        raise NotImplementedError("Étape 1 : implémente paths()")
+        raise NotImplementedError("Step 1: implement paths()")

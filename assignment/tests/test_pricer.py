@@ -1,4 +1,4 @@
-"""Étape 2 (et étape 3 pour la comparaison) — pricer Monte Carlo de bout en bout."""
+"""Step 2 (and step 3 for the comparison) — end-to-end Monte Carlo pricer."""
 
 from mc_pricer import GBMSimulator, BlackScholes, MonteCarloPricer, compare_to_bs
 

@@ -13,13 +13,13 @@ from scipy.stats import norm
 
 
 def call_payoff(s_t: np.ndarray, k: float) -> np.ndarray:
-    """TODO étape 2 : max(S_T - K, 0), vectorisé (np.maximum)."""
-    raise NotImplementedError("Étape 2 : implémente call_payoff()")
+    """TODO step 2: max(S_T - K, 0), vectorized (np.maximum)."""
+    raise NotImplementedError("Step 2: implement call_payoff()")
 
 
 def put_payoff(s_t: np.ndarray, k: float) -> np.ndarray:
-    """TODO étape 2 : max(K - S_T, 0), vectorisé (np.maximum)."""
-    raise NotImplementedError("Étape 2 : implémente put_payoff()")
+    """TODO step 2: max(K - S_T, 0), vectorized (np.maximum)."""
+    raise NotImplementedError("Step 2: implement put_payoff()")
 
 
 PAYOFFS = {"call": call_payoff, "put": put_payoff}
@@ -38,7 +38,7 @@ class PricingResult:
         pct = int(self.confidence * 100)
         return (
             f"PricingResult(price={self.price:.4f}, "
-            f"IC{pct}=[{self.ci_low:.4f}, {self.ci_high:.4f}], "
+            f"CI{pct}=[{self.ci_low:.4f}, {self.ci_high:.4f}], "
             f"std_error={self.std_error:.6f}, n_paths={self.n_paths})"
         )
 
@@ -53,23 +53,24 @@ class MonteCarloPricer:
     def price(self, s_t: np.ndarray, k: float, option_type: str = "call",
                confidence: float = 0.95) -> PricingResult:
         """
-        TODO étape 2 :
-        1. Récupère la fonction payoff via PAYOFFS[option_type].
-        2. Actualise : discounted = exp(-r*T) * payoff(s_t, k).
+        TODO step 2:
+        1. Look up the payoff function via PAYOFFS[option_type].
+        2. Discount: discounted = exp(-r*T) * payoff(s_t, k).
         3. n = discounted.size, mean = discounted.mean().
         4. std_error = discounted.std(ddof=1) / sqrt(n).
         5. z = norm.ppf(0.5 + confidence/2) ; half_width = z * std_error.
-        6. Retourne un PricingResult(price=mean, std_error=..., ci_low=mean-half_width,
+        6. Return a PricingResult(price=mean, std_error=..., ci_low=mean-half_width,
            ci_high=mean+half_width, n_paths=n, confidence=confidence).
         """
-        raise NotImplementedError("Étape 2 : implémente MonteCarloPricer.price()")
+        raise NotImplementedError("Step 2: implement MonteCarloPricer.price()")
 
 
 def compare_to_bs(mc_result: PricingResult, bs_price: float) -> dict:
     """
-    TODO étape 3 : écart absolu, écart relatif, et test d'appartenance à l'IC.
+    TODO step 3: absolute error, relative error, and whether bs_price falls
+    within the MC result's confidence interval.
 
-    Retourne un dict avec les clés :
+    Return a dict with keys:
     mc_price, bs_price, abs_error, rel_error, within_ci (bool).
     """
-    raise NotImplementedError("Étape 3 : implémente compare_to_bs()")
+    raise NotImplementedError("Step 3: implement compare_to_bs()")

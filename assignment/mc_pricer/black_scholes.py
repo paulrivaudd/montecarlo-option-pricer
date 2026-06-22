@@ -24,21 +24,21 @@ class BlackScholes:
 
     @property
     def _d1(self) -> float:
-        """TODO étape 3 : voir formule dans le docstring du module."""
-        raise NotImplementedError("Étape 3 : implémente _d1")
+        """TODO step 3: see formula in the module docstring."""
+        raise NotImplementedError("Step 3: implement _d1")
 
     @property
     def _d2(self) -> float:
-        """TODO étape 3 : d2 = d1 - sigma * sqrt(T)."""
-        raise NotImplementedError("Étape 3 : implémente _d2")
+        """TODO step 3: d2 = d1 - sigma * sqrt(T)."""
+        raise NotImplementedError("Step 3: implement _d2")
 
     def call_price(self) -> float:
-        """TODO étape 3 : S0*N(d1) - K*e^{-rT}*N(d2), avec norm.cdf."""
-        raise NotImplementedError("Étape 3 : implémente call_price()")
+        """TODO step 3: S0*N(d1) - K*e^{-rT}*N(d2), using norm.cdf."""
+        raise NotImplementedError("Step 3: implement call_price()")
 
     def put_price(self) -> float:
-        """TODO étape 3 : K*e^{-rT}*N(-d2) - S0*N(-d1)."""
-        raise NotImplementedError("Étape 3 : implémente put_price()")
+        """TODO step 3: K*e^{-rT}*N(-d2) - S0*N(-d1)."""
+        raise NotImplementedError("Step 3: implement put_price()")
 
     def price(self, option_type: str = "call") -> float:
         if option_type == "call":
