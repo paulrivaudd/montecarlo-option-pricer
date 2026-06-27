@@ -1,6 +1,6 @@
 # Monte Carlo Pricer
 
-Project 1/3 of the summer 2026 quant roadmap. Pricing of European options (call/put) by Monte Carlo simulation under the Black-Scholes model, with comparison to the closed-form formula and a convergence study.
+Pricing of European options (call/put) by Monte Carlo simulation under the Black-Scholes model, with comparison to the closed-form formula and a convergence study.
 
 ## Model and method
 
