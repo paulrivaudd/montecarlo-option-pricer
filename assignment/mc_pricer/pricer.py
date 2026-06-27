@@ -14,12 +14,13 @@ from scipy.stats import norm
 
 def call_payoff(s_t: np.ndarray, k: float) -> np.ndarray:
     """TODO step 2: max(S_T - K, 0), vectorized (np.maximum)."""
-    raise NotImplementedError("Step 2: implement call_payoff()")
+    return np.maximum(s_t-k,0)   #ici on utilise pas max() car on opère sur des tableaux
 
 
 def put_payoff(s_t: np.ndarray, k: float) -> np.ndarray:
     """TODO step 2: max(K - S_T, 0), vectorized (np.maximum)."""
-    raise NotImplementedError("Step 2: implement put_payoff()")
+    return np.maximum(k-s_t,0)  # de même ici
+
 
 
 PAYOFFS = {"call": call_payoff, "put": put_payoff}
