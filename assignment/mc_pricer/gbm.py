@@ -24,27 +24,35 @@ class GBMSimulator:
         self.rng = np.random.default_rng(seed)
 
     def terminal(self, T: float, n_paths: int) -> np.ndarray:
-        """
-        Draw S_T directly from its exact log-normal law. Shape: (n_paths,).
-
-        TODO:
-        1. Draw `n_paths` realizations Z ~ N(0,1) with self.rng.standard_normal.
-        2. Compute S_T = s0 * exp[(r - sigma^2/2) * T + sigma * sqrt(T) * Z].
-        3. Return the array (no Python loop).
-        """
-        raise NotImplementedError("Step 1: implement terminal()")
+        Z = self.rng.standard_normal(n_paths)
+        s_t = self.s0 * np.exp((self.r - self.sigma**2 / 2) * T + self.sigma * np.sqrt(T) * Z)
+        return s_t
+    
 
     def paths(self, T: float, n_steps: int, n_paths: int) -> np.ndarray:
         """
         Simulate full trajectories on a uniform grid of n_steps + 1 dates
-        (t=0 included). Shape: (n_paths, n_steps + 1).
+        (t=0 included). Shape: (n_paths, n_steps + 1). """
+        
+        dt = T / n_steps
+        Z = self.rng.standard_normal((n_paths, n_steps))
+        log_incr = (self.r - self.sigma**2 / 2) * dt + self.sigma * np.sqrt(dt) * Z
+        log_paths = np.cumsum(log_incr, axis=1)
+        log_paths = np.hstack((np.full((n_paths, 1), np.log(self.s0)), log_paths))
+        s_paths = np.exp(log_paths)
+        return s_paths  
 
-        TODO:
-        1. dt = T / n_steps.
-        2. Draw a matrix Z of shape (n_paths, n_steps).
-        3. Compute the log-price increments: (r - sigma^2/2)*dt + sigma*sqrt(dt)*Z.
-        4. Cumulate these increments (np.cumsum, axis=1) starting from ln(s0).
-        5. Prepend the t=0 column (all equal to ln(s0)), then exponentiate
-           back to price space with np.exp.
-        """
-        raise NotImplementedError("Step 1: implement paths()")
+
+# test Var(W_t) = t empirically to check that the standard normal draws are correct 
+
+rng = np.random.default_rng(42)  # seed=42 for reproductibility 
+
+t = 1.0          # time horizon 
+n_trajectories = 10_000
+
+Z = rng.standard_normal(n_trajectories)
+W_t = np.sqrt(t) * Z
+
+empirical_var = W_t.var()
+print(f"Variance empirique : {empirical_var:.4f}")
+print(f"Variance théorique : {t}")
