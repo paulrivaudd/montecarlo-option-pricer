@@ -56,3 +56,5 @@ W_t = np.sqrt(t) * Z
 empirical_var = W_t.var()
 print(f"Variance empirique : {empirical_var:.4f}")
 print(f"Variance théorique : {t}")
+
+print(f"20 trajectoires de S_t simulées : { GBMSimulator(s0=100, r=0.05, sigma=0.2, seed=42).terminal(T=t, n_paths=20)}")
